@@ -28,7 +28,7 @@ Onibus* Empresa::adicionar_onibus(std::string placa_recebida, int lotacao_maxima
 void Empresa::imprimir_estado(){
     int i=0;
     for(i=0;i<this->quantidade_onibus_cadastrados;i++){
-        std::cout<<this->onibus_da_empresa[i]->placa<<" "<< this->onibus_da_empresa[i]->lotacao_atual<< " "<<this->onibus_da_empresa[i]->capacidade_maxima<<std::endl;
+        this->onibus_da_empresa[i]->imprimir_estado();
     }
 }
 

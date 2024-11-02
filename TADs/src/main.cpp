@@ -62,10 +62,26 @@ int main() {
                 break;
             }
             case 'T':{
+                string onibus_a_transferir_passageiros;
                 string onibus_a_receber_passageiros;
-                int quant_pessoas_a_transferir=0;
+                int quant_pessoas_a_transferir=0, resultado_busca_onibus_transferir=0, resultado_busca_onibus_receber=0;
 
-                
+                cin>>onibus_a_transferir_passageiros;
+                cin>>onibus_a_receber_passageiros;
+                cin>>quant_pessoas_a_transferir;
+
+                resultado_busca_onibus_transferir=empresaCadastrada->acha_indice_onibus(onibus_a_transferir_passageiros);
+                resultado_busca_onibus_receber=empresaCadastrada->acha_indice_onibus(onibus_a_receber_passageiros);
+                if(resultado_busca_onibus_receber == ONIBUS_NAO_FOI_ACHADO||resultado_busca_onibus_transferir == ONIBUS_NAO_FOI_ACHADO){
+                    cout<<"ERRO : onibus inexistente"<<endl;
+                }else{
+                    empresaCadastrada->onibus_da_empresa[resultado_busca_onibus_transferir]->transfere_passageiros(empresaCadastrada->onibus_da_empresa[resultado_busca_onibus_receber], quant_pessoas_a_transferir);
+                }
+                break;
+            }
+            case 'I':{
+                empresaCadastrada->imprimir_estado();
+                break;
             }
         }
     } while (comando != 'F');
