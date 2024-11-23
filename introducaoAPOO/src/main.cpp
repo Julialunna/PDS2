@@ -1,11 +1,21 @@
 #include <iostream>
 #include "aluno.hpp"
-#include <list>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+
+#define SUCESSO 0
+
+struct CompararPorNome {
+    bool operator()(Aluno& a, Aluno& b){
+        return a.get_nome() < b.get_nome(); 
+    }
+};
 
 int main(){
     std::string nome_entrada;
     int num_matricula_entrada, nota_aluno_entrada;
-    std::list<Aluno>lista_de_alunos;
+    std::vector<Aluno>vector_de_alunos;
     Aluno aluno_entrada;
 
     while(true){
@@ -17,18 +27,34 @@ int main(){
 
         std::cin>>num_matricula_entrada;
         aluno_entrada.set_num_matricula(num_matricula_entrada);
-        do{
+
+        while(true){
             std::cin>>nota_aluno_entrada;
+            if(nota_aluno_entrada==-1){
+                break;
+            }
             aluno_entrada.set_nota(nota_aluno_entrada);
-        }while(nota_aluno_entrada!=-1);
-        lista_de_alunos.push_back(aluno_entrada);
-        aluno_entrada.limpar_vetor();
+
+        }
+        
+        vector_de_alunos.push_back(aluno_entrada);
+        aluno_entrada.reiniciar_aluno();
     }
 
-    
-    for(auto it=lista_de_alunos.begin();it!=lista_de_alunos.end();++it){
-        std::cout << "Nome: " << it->get_nome() << std::endl;
-        std::cout << "Matrícula: " << it->get_num_matricula() << std::endl;
-        std::cout << "Nota: " << it->get_notas_aluno()[0] << std::endl;
+    std::sort(vector_de_alunos.begin(), vector_de_alunos.end(), CompararPorNome());
+
+    int i;
+    for(auto it=vector_de_alunos.begin();it!=vector_de_alunos.end();++it){
+        std::cout << it->get_num_matricula() <<" " << std::ends;
+        std::cout << it->get_nome() <<" "<< std::ends;
+        for(i=0;i<it->get_notas_aluno().size();++i){
+            std::cout << it->get_notas_aluno()[i] <<" "<< std::ends;
+        }
+        std::cout<<std::endl;
+
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout <<it->calcular_media_das_notas() <<" "<< it->achar_maior_nota()<<" "<<it->achar_menor_nota()<<std::endl;
     }
+    return SUCESSO;
 }
+
