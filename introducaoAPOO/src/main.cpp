@@ -43,7 +43,7 @@ int main(){
 
     std::sort(vector_de_alunos.begin(), vector_de_alunos.end(), CompararPorNome());
 
-    int i;
+    std::size_t i;
     for(auto it=vector_de_alunos.begin();it!=vector_de_alunos.end();++it){
         std::cout << it->get_num_matricula() <<" " << std::ends;
         std::cout << it->get_nome() <<" "<< std::ends;
