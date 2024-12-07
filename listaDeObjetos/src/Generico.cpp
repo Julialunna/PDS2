@@ -17,4 +17,13 @@ int Generico::Get_id(){
 void Generico::imprime_informacao(){
     std::cout<<this->id<<" "<<this<<std::endl;
 }
-    
+int Generico::Get_quant_objetos_generico(){
+    return Generico::quant_objetos_generico;
+}
+void Generico::Set_quant_objetos_generico(int valor){
+    Generico::quant_objetos_generico= valor;
+}
+
+Generico::~Generico(){
+    Generico::Set_quant_objetos_generico(Generico::Get_quant_objetos_generico()-1);
+}

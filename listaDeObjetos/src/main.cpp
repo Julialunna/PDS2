@@ -15,11 +15,11 @@ int main(){
             break;
         }
         switch (comando){
-        case 'A':
+        case 'A':{
             lista_de_genericos.push_back(new Generico());
-            lista_de_genericos.back()->imprime_informacao();
+            lista_de_genericos.back()->imprime_informacao();}
             break;
-        case 'C':
+        case 'C':{
             int id_novo_objeto;
             cin>>id_novo_objeto;
 
@@ -28,17 +28,40 @@ int main(){
                 lista_de_genericos.front()->imprime_informacao();
             }else{
                 cout<<"ERRO"<<endl;
-            }
+            }}
             break;
-        case 'R':
+        case 'R':{
             if(lista_de_genericos.empty()){
                 cout<<"ERRO"<<endl;
             }else{
                 Generico* objeto_a_ser_deletado = lista_de_genericos.front();
                 lista_de_genericos.pop_front();
+
                 objeto_a_ser_deletado->imprime_informacao();
                 delete objeto_a_ser_deletado;
-            }
+            }}
+            break;
+        case 'N':{
+            cout<<Generico::Get_quant_objetos_generico()<<endl;}
+            break;
+        case 'P':{
+            int indice_objeto_a_ser_impresso=0, i=0;
+            cin>>indice_objeto_a_ser_impresso;
+            if(indice_objeto_a_ser_impresso<1 || indice_objeto_a_ser_impresso>Generico::Get_quant_objetos_generico()){
+                cout<<"ERRO"<<endl;
+            }else{
+                for(auto objeto_generico:lista_de_genericos){
+                    i++;
+                    if(i==indice_objeto_a_ser_impresso){
+                        objeto_generico->imprime_informacao();
+                    }
+                }
+            }}
+            break;
+        case 'L':{
+            for(auto objeto_generico:lista_de_genericos){
+                objeto_generico->imprime_informacao();
+            }}
             break;
         }
     }
