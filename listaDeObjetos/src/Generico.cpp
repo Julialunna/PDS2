@@ -1,4 +1,5 @@
 #include "Generico.hpp"
+#include <iostream>
 int Generico::contador_id=0;
 int Generico::quant_objetos_generico=0;
 Generico::Generico(int id_recebido){
@@ -12,5 +13,8 @@ Generico::Generico(){
 }
 int Generico::Get_id(){
     return this->id;
+}
+void Generico::imprime_informacao(){
+    std::cout<<this->id<<" "<<this<<std::endl;
 }
     

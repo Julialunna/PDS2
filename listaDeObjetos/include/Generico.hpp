@@ -8,4 +8,5 @@ class Generico{
         Generico();
         Generico(int id_recebido);
         int Get_id();
+        void imprime_informacao();
 };
