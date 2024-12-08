@@ -1,7 +1,44 @@
 const int SUCESSO = 0;
-#include "Generico.hpp"
+
 #include <iostream>
 #include <list>
+
+class Generico{
+    private:
+        int id=0;
+        static int contador_id;
+        static int quant_objetos_generico;
+
+    public:
+    Generico(int id_recebido){
+        this->id=id_recebido;
+        quant_objetos_generico++;
+    }
+    Generico(){
+        contador_id++;
+        quant_objetos_generico++;
+        this->id=contador_id;
+    }
+    int Get_id(){
+        return this->id;
+    }
+    void imprime_informacao(){
+        std::cout<<this->id<<" "<<this<<std::endl;
+    }
+    static int Get_quant_objetos_generico(){
+        return quant_objetos_generico;
+    }
+    static void Set_quant_objetos_generico(int valor){
+        quant_objetos_generico= valor;
+    }
+
+    ~Generico(){
+        Set_quant_objetos_generico(Get_quant_objetos_generico()-1);
+    }
+};
+
+int Generico::contador_id=0;
+int Generico::quant_objetos_generico=0;
 
 using namespace std;
 
